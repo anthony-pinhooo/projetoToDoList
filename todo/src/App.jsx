@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import Todo from './component/Todo';
+import Todo from './component/todo';
 import TodoForm from './component/TodoForm';
-
 import './App.css'
 
 function App() {
   // eslint-disable-next-line no-unused-vars
+
+  // Lista de mockup para teste
   const [toDos, setTodos] = useState([
     {
       id: 1,
@@ -28,7 +29,35 @@ function App() {
   ])
 
   const addTodo = (text, category) => {
-    const newTodos = [...toDos, ]
+      const newTodos = [...toDos, {
+        // Criando um id único para cada item
+        id: Math.floor(Math.random() * 1000),
+        text,
+        category,
+        isCompleted: false,
+      },
+    ];
+    // Setando a nova lista de ToDos
+    setTodos(newTodos)
+  };
+
+  const removeTodo = (id) => {
+    // Passando os valores da lista para a variável
+    const newTodos = [...toDos]
+
+    // Filtrando os valores que são iguais ao valor retornado pela função
+    const filteredTodos = newTodos.filter((todo) => 
+      todo.id !== id ? todo : null
+    );
+    // Setando a nova lista
+    setTodos(filteredTodos)
+  };
+
+  const completeTodo = (id) => {
+    const newTodos = [...toDos]
+    newTodos.map((todo) => todo.id == id ? todo.isCompleted = !todo.isCompleted : todo)
+
+    setTodos(newTodos)
   }
 
   return (
@@ -37,5 +66,12 @@ function App() {
       <div className='todo-list'>
         {toDos.map((todo) => (
           // eslint-disable-next-line react/jsx-key
-          <Todo key={todo.id} texto={todo.text} categoria={todo.category}/>
-   
+          <Todo key={todo.id} texto={todo.text} categoria={todo.category} id={todo.id} feito={todo.isCompleted} removeTodo={removeTodo} completeTodo={completeTodo}/>
+        ))}
+      </div>
+      <TodoForm addTodo={addTodo}/>
+    </div>
+  );
+}
+
+export default App

@@ -1,18 +1,22 @@
 import { useState } from "react"
 
-function TodoForm() {
+// eslint-disable-next-line react/prop-types
+function TodoForm({ addTodo }) {
     const [value, setValue] = useState("");
     const [category, setCategory] = useState("");
 
+    // Função para capturar os dados do form
     const handleSubmit = (e) => {
         e.preventDefault();
+        //Verificando se existe alguma coisa nos campos
         if(!value || !category) return;
+
         //adicionar todo
-        
+        addTodo(value, category);
+
         //limpar os campos
         setValue("")
         setCategory("")
-        console.log(value, category)
     }
 
   return (
@@ -37,4 +41,4 @@ function TodoForm() {
   )
 }
 
-export defaul
+export default TodoForm
