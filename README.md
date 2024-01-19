@@ -1,1 +1,1 @@
-<h1>Projeto ToDo List com React</h1>
+<h1>Projeto To Do List com React</h1>
