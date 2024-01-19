@@ -32,6 +32,8 @@ function App() {
     }
   ])
 
+  const [search, setSearch] = useState("")
+
   const addTodo = (text, category) => {
       const newTodos = [...toDos, {
         // Criando um id único para cada item
@@ -62,16 +64,16 @@ function App() {
     newTodos.map((todo) => todo.id == id ? todo.isCompleted = !todo.isCompleted : todo)
 
     setTodos(newTodos)
-  }
+  };
 
-  const [search, setSearch] = useState("")
+  
 
   return (
     <div className='app'>
       <h1>Lista de tarefas</h1>
       <Search search={search} setSearch={setSearch}/>
       <div className='todo-list'>
-        {toDos.filter((todo) => todo.text.toLowerCase().includes(search.toLowerCase)).map((todo) => (
+        {toDos.filter((todo) => todo.text.toLowerCase().includes(search.toLowerCase())).map((todo) => (
           // eslint-disable-next-line react/jsx-key
           <Todo 
             key={todo.id} 
