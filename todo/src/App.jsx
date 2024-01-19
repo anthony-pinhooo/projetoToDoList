@@ -1,7 +1,11 @@
 import { useState } from 'react'
+
 import Todo from './component/todo';
 import TodoForm from './component/TodoForm';
+import Search from './component/Search';
+
 import './App.css'
+
 
 function App() {
   // eslint-disable-next-line no-unused-vars
@@ -60,13 +64,24 @@ function App() {
     setTodos(newTodos)
   }
 
+  const [search, setSearch] = useState("")
+
   return (
     <div className='app'>
       <h1>Lista de tarefas</h1>
+      <Search search={search} setSearch={setSearch}/>
       <div className='todo-list'>
-        {toDos.map((todo) => (
+        {toDos.filter((todo) => todo.text.toLowerCase().includes(search.toLowerCase)).map((todo) => (
           // eslint-disable-next-line react/jsx-key
-          <Todo key={todo.id} texto={todo.text} categoria={todo.category} id={todo.id} feito={todo.isCompleted} removeTodo={removeTodo} completeTodo={completeTodo}/>
+          <Todo 
+            key={todo.id} 
+            texto={todo.text} 
+            categoria={todo.category} 
+            id={todo.id} 
+            feito={todo.isCompleted} 
+            removeTodo={removeTodo} 
+            completeTodo={completeTodo}
+          />
         ))}
       </div>
       <TodoForm addTodo={addTodo}/>
